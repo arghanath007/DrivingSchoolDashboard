@@ -1,5 +1,3 @@
-import React from "react";
-
 export const setAuth = (auth) => {
   localStorage.setItem("token", JSON.stringify(auth.data.Authorization));
   localStorage.setItem("username", JSON.stringify(auth.data.username));
@@ -26,4 +24,34 @@ export const getAuth = () => {
   return userObject;
 };
 
-export const resetAuth = () => {};
+export const resetAuth = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+  localStorage.removeItem("name");
+  localStorage.removeItem("role");
+
+  let userObject = {};
+  return userObject;
+};
+
+export const validateAuth = (auth) => {
+  let userObject = {};
+  userObject.token = JSON.parse(localStorage.getItem("token"));
+  userObject.username = JSON.parse(localStorage.getItem("username"));
+  userObject.name = JSON.parse(localStorage.getItem("name"));
+  userObject.role = JSON.parse(localStorage.getItem("role"));
+
+  if (
+    userObject.token &&
+    userObject.username &&
+    userObject.name &&
+    userObject.role &&
+    auth.token === userObject.token &&
+    auth.username === userObject.username &&
+    auth.name === userObject.name &&
+    auth.role === userObject.role
+  ) {
+    return true;
+  }
+  return false;
+};

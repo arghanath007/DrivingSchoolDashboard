@@ -1,5 +1,5 @@
 import { useContext, createContext } from "react";
-import { getAuth } from "./localStorageUtil";
+import { getAuth } from "./LocalStorageUtil";
 import { Redirect, Route } from "react-router-dom";
 
 const AuthUserContext = createContext();
